@@ -1,0 +1,105 @@
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+</style>
+
+<!-- Custom styles for this template -->
+
+<body class="bg-light">
+
+    <div class="container">
+        <main>
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last">
+
+
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Paises</span>
+                    </h4>
+
+                    <app-tabla-paises (seSeleccionoPais)="seleccionarPais($event)"> </app-tabla-paises>
+
+
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Repartidor</h4>
+                    
+                    <form [formGroup]="repartidorForm">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Dni</label>
+                                <input type="number" class="form-control" id="dni" placeholder="Dni"
+                                    formControlName="dni">
+                                <small class="text-danger" *ngIf="repartidorForm.get('dni')?.errors">Dni
+                                    requerido</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                                formControlName="nombre">
+                            <small class="text-danger" *ngIf="repartidorForm.get('nombre')?.errors">Nombre
+                                requerido</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="address" class="form-label">Edad</label>
+                            <input type="number" class="form-control" id="edad" placeholder="Edad"
+                                formControlName="edad">
+                            <small class="text-danger" *ngIf="repartidorForm.get('edad')?.errors">Edad
+                                requerida</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="address" class="form-label">Capacidad</label>
+                            <input type="number" class="form-control" id="capacidad" placeholder="Capacidad"
+                                formControlName="capacidad">
+                            <small class="text-danger"
+                                *ngIf="repartidorForm.get('capacidad')?.errors">Capacidad requerida</small>
+                        </div>
+
+                        <div class="form-check">
+                            <label for="propia">Unidad propia: </label>
+                            <input type="checkbox" class="form-check-input" name="propia" id="propia"
+                                formControlName="propia">
+                        </div>
+                        <div class="col-md-6 mb-3" >
+                            <label for="paisOrigen">País de origen:</label>
+                            <br>
+                            <input type="text" class="form-control" id="paisOrigen" name="paisOrigen" placeholder="País"  formControlName="paisOrigen" readonly>
+                            <small class="text-danger" *ngIf="repartidorForm.get('paisOrigen')?.errors">País requerido</small>
+                        </div>
+                        <hr class="my-4">
+                        <button class="w-100 btn btn-primary btn-lg" type="submit"
+                            [disabled]="repartidorForm.invalid" (click)="crearRepartidor()">Crear
+                            repartidor</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+<div class="colm-form">
+    <div class="form-container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <h2>Inicia Sesion</h2>
+                </div>
+            </div>
+            <div class="row formulario">
+
+                <div class="col-md-12 mb-5">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese email" required
+                        formControlName="email">
+                    <small *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
+                        class="invalid">El email es requerido</small>
+                    <small *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']"
+                        class="invalid">El email tiene que ser valido.</small>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="Ingrese contraseña" required
+                        formControlName="password">
+                    <small
+                        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
+                        class="invalid">La contraseña es requerida</small>
+                    <small
+                        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']"
+                        class="invalid">La contraseña tiene que ser mas larga.</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button (click)="valoresAdmin()" class="btn btn-primary btn-block"  onclick="this.blur();" >Ingresar como admin</button>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="valoresEmpleado()" class="btn btn-primary btn-block"  onclick="this.blur();"> Ingresar como empleado</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-grid gap-2">
+                    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-block" onclick="this.blur();"> Login </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
