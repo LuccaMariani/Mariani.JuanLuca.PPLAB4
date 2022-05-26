@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'PrimerParcialLaboratorio4';
   
-  userLogged=this.authService.isLoggedIn();
+  userLogged=this.authService.whoIsLoggedIn();
 
   constructor(private authService: AuthService) { }
 

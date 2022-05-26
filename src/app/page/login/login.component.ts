@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit():void{ 
-    console.log('Form:'+this.loginForm);
+    console.log('Form al darle al submit:',this.loginForm);
     this.Login();
   }
 
@@ -53,18 +53,19 @@ export class LoginComponent implements OnInit {
 
   Login(){
     
-    console.log(this.usuario);
+    console.log('le di al login:', this.usuario);
     const{email,password}=this.loginForm.value;
     this.usuario.email=email;
     this.usuario.password=password;
 
-    this.authService.login(this.usuario).then(res => {
-      console.log('Login exitoso', res);
-      this.route.navigate(['bienvenida']);
-
-    }).catch(error => {
-      console.log('Login fallido, mensaje error:', error);
-      this.loginForm.reset();
-    });
+    let resultado = this.authService.login(this.usuario)
+    resultado.then(data=>{
+      console.log('login en component, data:', data);
+      if(data.status)
+      {
+        
+        console.log('salio bien');
+      }
+    })
   }
 }
