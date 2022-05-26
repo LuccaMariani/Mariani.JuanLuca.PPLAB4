@@ -9,11 +9,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr style="cursor: pointer;"  *ngFor="let pizza of pizzas">
+            <tr style="cursor: pointer;" (click)="lanzarEventoPizzaSeleccionada(pizza)"  *ngFor="let pizza of listaPizzas">
                 <td>{{pizza.nombre}}</td>
                 <td>{{pizza.ingredientes}}</td>
                 <td>{{pizza.precio}}</td>
-                <td>{{pizza.prpesoecio}}</td>
+                <td>{{pizza.peso}}grs</td>
+               
             </tr>
         </tbody>
     </table>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Pizza } from 'src/app/clases/pizza';
+import { PizzaService } from 'src/app/services/pizza.service';
 
 @Component({
   selector: 'app-pizza-crear',
@@ -13,11 +14,10 @@ export class PizzaCrearComponent implements OnInit {
 
   @Output() crearPizzaEvento = new EventEmitter<any>();
 
-
   nombre = new FormControl('', Validators.required);
   ingredientes = new FormControl('', Validators.required);
   precio = new FormControl('', Validators.required);
-  peso = new FormControl('',[Validators.required, Validators.min(500), Validators.max(1000)]);
+  peso = new FormControl('', [Validators.required, Validators.min(500), Validators.max(1000)]);
 
   pizzaFormGroup = new FormGroup({
     nombre: this.nombre,
@@ -26,31 +26,28 @@ export class PizzaCrearComponent implements OnInit {
     peso: this.peso
   });
 
-  constructor() { }
+  constructor(private firebase: PizzaService) { }
 
   ngOnInit(): void {
   }
 
-  crearPizza(){
-    if(this.pizzaFormGroup.valid){
-      
-      try{
+  crearPizza() {
+    if (this.pizzaFormGroup.valid) {
+      try {
         this.laPizza = this.pizzaFormGroup.value;
         this.crearPizzaEvento.emit(this.laPizza);
         console.log('Evento alta pizza ejecuado correctamente', this.laPizza);
       }
-      catch{
+      catch {
         console.log('Error al ejecutar Evento alta pizza');
       }
-      
     }
-    else
-    {
+    else {
       console.log('el form no es valido');
     }
   }
-  
 
 
-  
+
+
 }

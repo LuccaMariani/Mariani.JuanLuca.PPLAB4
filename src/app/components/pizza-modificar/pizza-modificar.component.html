@@ -1,1 +1,57 @@
-<p>pizza-modificar works!</p>
+<style>
+    .form-label {
+        padding-top: 0.5cm;
+    }
+
+    .button {
+        padding-top: 0.5cm;
+    }
+</style>
+<form [formGroup]="pizzaFormGroup">
+
+    <div>
+        <label for="firstName" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre" readonly>
+        <small class="text-danger" *ngIf="pizzaFormGroup.get('nombre')?.errors">Nombre requerido</small>
+    </div>
+
+    <div *ngIf="this.pizzaRecibidaModificar.nombre != 'Seleccione una pizza' ">
+
+        <div>
+            <label for="ingridients" class="form-label">Ingredientes</label>
+            <input type="text" class="form-control" id="ingredientes" placeholder="Ingredientes"
+                formControlName="ingredientes" required>
+            <small class="text-danger" *ngIf="pizzaFormGroup.get('ingredientes')?.errors">Ingredientes
+                requeridos</small>
+
+        </div>
+
+
+        <div>
+            <div>
+                <label for="firstName" class="form-label">Peso aproximado</label>
+                <input type="number" class="form-control" id="peso" placeholder="Peso" formControlName="peso" required>
+                <small class="text-danger" *ngIf="pizzaFormGroup.get('peso')?.errors?.['required'] ">Peso
+                    requerido</small>
+                <small class="text-danger" *ngIf="pizzaFormGroup.get('peso')?.errors?.['min'] ">Peso tiene que ser mayor
+                    a
+                    500 grs</small>
+                <small class="text-danger" *ngIf="pizzaFormGroup.get('peso')?.errors?.['max'] ">Peso tiene que ser menor
+                    a
+                    1000 grs</small>
+
+            </div>
+        </div>
+
+        <div>
+            <div class="col-sm-6">
+                <label for="firstName" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" placeholder="Precio" formControlName="precio">
+                <small class="text-danger" *ngIf="pizzaFormGroup.get('precio')?.errors ">Precio invalido</small>
+            </div>
+        </div>
+        <hr>
+        <button class="w-100 btn btn-warning btn-lg" type="submit" [disabled]="pizzaFormGroup.invalid"
+            (click)="modificarPizza()">Modificar Pizza</button>
+    </div>
+</form>

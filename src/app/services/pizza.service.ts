@@ -25,7 +25,7 @@ export class PizzaService {
 
   guardarPizza(pizza: Pizza) {
     console.log("pizza a guardar:", pizza);
-    return this.firestore.collection(this.ruta).add({
+    return this.firestore.collection(this.ruta).doc(pizza.nombre).set({
       nombre: pizza.nombre,
       ingredientes: pizza.ingredientes,
       precio: pizza.precio,
@@ -42,9 +42,9 @@ export class PizzaService {
     }
   }
 
-  async modificarPizza(collection: string, id: any, dato: any) {
+  async modificarPizza(collection: string, nombre: any, dato: any) {
     try {
-      return await this.firestore.collection(collection).doc(id).set(dato);
+      return await this.firestore.collection(collection).doc(nombre).update(dato);
     } catch (error) {
       console.log("error en update pizza ", error)
     }

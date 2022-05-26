@@ -24,7 +24,9 @@
             </div>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
                 <h1 class="display-4 fw-normal">Listado de Pizzas</h1>
-                <app-pizza-listado></app-pizza-listado>
+                <p style="cursor: pointer;" >Haga click sobre una pizza para modificarla o borrarla.</p>
+
+                <app-pizza-listado (EventoPizzaSeleccionada)="recibeEventoPizzaSeleccionada($event)"></app-pizza-listado>
             </div>
         </header>
         <main>
