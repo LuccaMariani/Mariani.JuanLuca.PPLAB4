@@ -1,0 +1,22 @@
+                
+<h2 class="display-5 fw-bold">Listado de Repartidores</h2>
+<p style="cursor: pointer;" (click)="ver()">Haga click sobre un repartidor para mostrar un detalle sobre este.</p>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Dni</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="cursor: pointer;" (click)="mostrarDetalles(repartidor)" *ngFor="let repartidor of listaRepartidores">
+                <td>{{repartidor.dni}}</td>
+                <td>{{repartidor.nombre}}</td>
+                <td>{{repartidor.edad}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

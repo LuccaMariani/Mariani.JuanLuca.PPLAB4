@@ -1,0 +1,21 @@
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Ingredientes</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Peso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="cursor: pointer;"  *ngFor="let pizza of pizzas">
+                <td>{{pizza.nombre}}</td>
+                <td>{{pizza.ingredientes}}</td>
+                <td>{{pizza.precio}}</td>
+                <td>{{pizza.prpesoecio}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

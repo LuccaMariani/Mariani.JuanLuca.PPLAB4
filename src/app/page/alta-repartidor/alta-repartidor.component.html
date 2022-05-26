@@ -5,6 +5,7 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
+        
     }
 
     @media (min-width: 768px) {
@@ -20,6 +21,11 @@
 
     <div class="container">
         <main>
+            <header class="pb-3 mb-4 border-bottom" style="padding-top: 0.5cm;">
+                <a class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Parte 1</span>
+                </a>
+            </header>
             <div class="row g-5">
                 <div class="col-md-5 col-lg-4 order-md-last">
 
@@ -41,8 +47,10 @@
                                 <label for="firstName" class="form-label">Dni</label>
                                 <input type="number" class="form-control" id="dni" placeholder="Dni"
                                     formControlName="dni">
-                                <small class="text-danger" *ngIf="repartidorForm.get('dni')?.errors">Dni
-                                    requerido</small>
+                                <small class="text-danger" *ngIf="repartidorForm.get('dni')?.errors?.['required'] ">Dni requerido</small>
+                                <small class="text-danger" *ngIf="repartidorForm.get('dni')?.errors?.['min'] ">Dni tiene que ser mayor a 1.000.000</small>    
+                                <small class="text-danger" *ngIf="repartidorForm.get('dni')?.errors?.['max'] ">Dni tiene que ser menor a 100.000.000</small>    
+                            
                             </div>
                         </div>
 

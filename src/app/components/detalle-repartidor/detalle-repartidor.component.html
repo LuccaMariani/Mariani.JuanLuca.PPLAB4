@@ -1,0 +1,36 @@
+<div class="h-100 p-5 text-white bg-dark rounded-3">
+    <h2>Detalle</h2>
+    <div *ngIf="repartidorSeleccionadoRecibido!=null; else elseContent">
+        <table class="table">
+            <thead>
+                <tr style="color:white;">
+                    <th scope="col">Dni</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Pais de Origen</th>
+                    <th scope="col">Unidad Propia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="color:white;">
+                    <td>{{repartidorSeleccionadoRecibido?.dni || ''}}</td>
+                    <td>{{repartidorSeleccionadoRecibido?.nombre || ''}}</td>
+                    <td>{{repartidorSeleccionadoRecibido?.edad || ''}}</td>
+                    <td>{{repartidorSeleccionadoRecibido?.capacidad || ''}}</td>
+                    <td>{{repartidorSeleccionadoRecibido?.paisOrigen || ''}}</td>
+                    <td *ngIf="repartidorSeleccionadoRecibido?.unidadPropia == true; else No">Si</td>
+                    <ng-template #No>
+                        <td>
+                            No
+                        </td>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #elseContent>
+        <p>Aca va el detalle del repartidor seleccionado.</p>
+    </ng-template>
+    <p style="cursor: pointer;" (click)="ver()">Boton</p>
+</div>

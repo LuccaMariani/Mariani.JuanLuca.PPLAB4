@@ -8,7 +8,7 @@ export class Repartidor {
 
 // repartidor,(dni , nombre, edad,capacidad de transporte(unidades de pizzas), país de origen,unidad Propia (true o false)).
 
-    constructor(dni: number, edad: number, nombre: string , capacidad: number, paisOrigen: any, unidadPropia: boolean) {
+    constructor(dni: number = 0, edad: number = 0, nombre: string = ' ' , capacidad: number = 0, paisOrigen: any= 'Mexico', unidadPropia: boolean = false) {
       
         this.dni=dni;
         this.nombre = nombre;

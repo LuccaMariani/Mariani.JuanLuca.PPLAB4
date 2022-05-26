@@ -23,7 +23,7 @@ export class AuthService {
       }
     })
 
-    console.log(this.estaLogueado);
+    console.log("Estas lodeago? "+this.estaLogueado);
   }
 
   public async login(usuario: Usuario) {

@@ -27,7 +27,7 @@ export class TablaPaisesComponent implements OnInit {
     let nombreNativo:string;
     this.apiService.ObtenerPaises().subscribe((paises: any) => {
 
-    for (let index = 0; index < 10; index++){
+    for (let index = 5; index < 15  ; index++){
       console.log(paises[index]);
       name = paises[index].name.common;
       bandera = paises[index].flags.png;
@@ -36,7 +36,6 @@ export class TablaPaisesComponent implements OnInit {
       nombreNativo=paises[index].name.official;
       this.listaPaises.push(new Pais(name, bandera,nombreNativo,capital,poblacion));
     }
-      //this.listaPaises = this.shuffle(this.listaPaises).slice(0, 10);
     });
   }
 

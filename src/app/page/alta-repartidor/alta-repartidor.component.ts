@@ -53,7 +53,7 @@ export class AltaRepartidorComponent implements OnInit {
   initForm():FormGroup{
     //declarar las propiedades del form con FormBuilder
     return this.fb.group({
-      dni:['', [Validators.required]],
+      dni:['', [Validators.required,Validators.min(1000000), Validators.max(100000000)]],
       nombre:['', [Validators.required]],
       edad:['', [Validators.required]],
       capacidad:['', [Validators.required]],
@@ -75,27 +75,12 @@ export class AltaRepartidorComponent implements OnInit {
       //let Repartidor = new Repartidor(this.descripcion, this.precio, this.stock, this.paisOrigen, this.comestible);
       let repartidor = new Repartidor(
         this.repartidorForm.get('dni')?.value, 
-        this.repartidorForm.get('nombre')?.value, 
-        this.repartidorForm.get('edad')?.value, 
+        this.repartidorForm.get('edad')?.value,
+        this.repartidorForm.get('nombre')?.value,  
         this.repartidorForm.get('capacidad')?.value, 
         this.repartidorForm.get('paisOrigen')?.value,
         this.repartidorForm.get('propia')?.value);
       this.repartidorService.guardarRepartidor(repartidor).then(resp => {
-        /*
-        Swal.fire({
-          title:'Repartidor guardado',
-          text:'El Repartidor se guardó correctamente ',
-          icon:'success',
-          confirmButtonText:'Cerrar'
-        });
-        this.repartidorForm.reset();
-      }).catch((error) => {
-        Swal.fire({
-          title:'Error',
-          text:'Error al guardar el Repartidor: '+error,
-          icon:'error',
-          confirmButtonText:'Cerrar'
-        });*/
       });
     }
     else{
