@@ -3,42 +3,66 @@ import { Usuario } from '../clases/usuario';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { RESTORED_VIEW_CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  estaLogueado?: boolean;
-  estaAdmin?: boolean ;
-  private emailLogeado: any;
+  public data: any;
+  public retorno: boolean = false;
 
   constructor(private authService: AngularFireAuth, private router: Router, private angularfireStore: AngularFirestore) {
 
-    this.whoIsLoggedIn().subscribe(res => {
-      console.log('ACAA', res);
-      if (res != null) {
-        this.estaAdmin = this.esAdmin(res.email)
-        this.estaLogueado = true
-      } else {
-        this.estaLogueado = false
-        this.estaAdmin = false;
-      }
-    })
   }
 
 
-  public async login(usuario: Usuario) {/*
-    let respuesta = this.authService.signInWithEmailAndPassword(usuario.email, usuario.password)
-      .then(() => {
-        this.emailLogeado = usuario.email;
-      })
 
-    if (this.emailLogeado == 'admin@admin.com') {
-      this.estaAdmin == true;
+  /*
+  async GetData() {
+
+    try {
+      const data = await this.whoIsLoggedIn().toPromise();
+      console.log('data', data)
+      //await this.email = data;
     }
-    else { this.estaAdmin == false }
-    //return respuesta;*/
+    catch (e) {
+      console.log('ESTOO', e);
+    }
+    console.log('ESTOO', this.data);
+    //await this.email = this.data;
+  }
+  */
+
+
+  routing(state: any): boolean {
+    this.whoIsLoggedIn().subscribe(respuesta => {
+
+      console.log('respeusta', respuesta?.email?.toString());
+
+      switch (respuesta?.email?.toString()) {
+
+        case 'admin@gmail.com':
+          this.retorno = true;
+          break;
+
+        case 'empleado@gmail.com':
+          console.log('entro')
+
+          this.retorno = true;
+          break;
+
+      }
+
+    })
+    console.log('antes de irse', this.retorno)
+    return this.retorno
+  }
+
+
+
+  public async login(usuario: Usuario) {
 
     let respuesta = { status: false, error: '' };
     try {
@@ -58,23 +82,17 @@ export class AuthService {
     return this.authService.createUserWithEmailAndPassword(usuario.email, usuario.password);
   }
 
-  
-  esAdmin(email:any)
-  {
+  esAdmin(email: string) {
     return email == 'admin@gmail.com';
-  } 
+  }
+
+  esEmpleado(email: string) {
+    return email == 'empleado@gmail.com';
+  }
 
   whoIsLoggedIn() {
     return this.authService.authState;
   }
-
-  /*
-    estaLogued() {
-      if (this.whoIsLoggedIn() != null) {
-        return true;
-      }
-      return false;
-    }*/
 
   logout() {
     this.authService.signOut().then(() => {
@@ -82,5 +100,6 @@ export class AuthService {
       this.router.navigate(['/login']);
     })
   }
+
 }
 

@@ -53,18 +53,15 @@ export class LoginComponent implements OnInit {
 
   Login(){
     
-    console.log('le di al login:', this.usuario);
     const{email,password}=this.loginForm.value;
     this.usuario.email=email;
     this.usuario.password=password;
 
     let resultado = this.authService.login(this.usuario)
     resultado.then(data=>{
-      console.log('login en component, data:', data);
       if(data.status)
       {
-        
-        console.log('salio bien');
+        console.log('salio bien', data);
       }
     })
   }

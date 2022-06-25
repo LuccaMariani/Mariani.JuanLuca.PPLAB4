@@ -13,7 +13,7 @@ export class PizzaListadoComponent implements OnInit {
   public listaPizzas: Pizza[] = [];
   public cantidadPizzas: number = 0;
 
-   @Output() EventoPizzaSeleccionada = new EventEmitter<Pizza>();
+  @Output() EventoPizzaSeleccionada = new EventEmitter<Pizza>();
 
   constructor(private firebase :PizzaService) { }
 
@@ -33,6 +33,5 @@ export class PizzaListadoComponent implements OnInit {
   lanzarEventoPizzaSeleccionada(pizza:Pizza){
     // console.log(container);
     this.EventoPizzaSeleccionada.emit(pizza);
-    console.log('se lanza evento pizza selecccionada: ', pizza);
   }
 }

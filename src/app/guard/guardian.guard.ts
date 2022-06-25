@@ -1,36 +1,47 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { async, Observable } from 'rxjs';
+import { async, ConnectableObservable, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../clases/usuario';
+import { map, take } from 'rxjs/operators';
+import { RESTORED_VIEW_CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuardianGuard implements CanActivate, CanDeactivate<unknown> {
 
-  constructor(private uthService: AuthService,private router: Router){ 
+  public email: any;
+  public usuario = { "mail": '' };
+  public data: any;
+  public res: any;
 
-    
+  constructor(private authService: AuthService, private router: Router) {
+
+
   }
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('GUARD esta logeado:'+this.uthService.estaLogueado);
-      console.log('GUARD esta admin:'+this.uthService.estaAdmin);
-      //console.log('GUARD esta loged:'+this.uthService.estaLogued());
-      console.log('GUARD quien esta loged:',this.uthService.whoIsLoggedIn());
-      //"userLogged|async as usuario"
-      if(this.uthService.estaLogueado)
-      {
-        return true;
-      }else{
-        //this.router.navigate(['login']);
-        return true;
+    state: RouterStateSnapshot): Promise<boolean | UrlTree> {
+
+    await this.authService.whoIsLoggedIn().subscribe((usuario) => {
+      if (usuario != null) {
+        console.log('aaa', usuario.email)
+        if (usuario.email != "admin@gmail.com") {
+          this.router.navigateByUrl('bienvenida');
+        }
+        
+      } else {
+        this.router.navigateByUrl('bienvenida');
       }
+    });
+
+    return true;
   }
+
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
@@ -38,5 +49,9 @@ export class GuardianGuard implements CanActivate, CanDeactivate<unknown> {
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return true;
   }
-  
+
 }
+function tap(arg0: (auth: any) => void): import("rxjs").OperatorFunction<boolean, unknown> {
+  throw new Error('Function not implemented.');
+}
+
